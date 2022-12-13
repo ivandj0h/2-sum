@@ -13,7 +13,7 @@ public class App {
 //		SpringApplication.run(App.class, args);
 		int[] nums = {2, 7, 11, 15};
 		int target = 9;
-		int[] result = twoSum2(nums, target);
+		int[] result = twoSum3(nums, target);
 		System.out.println("Indeksnya adalah -> [" + result[0] + ", " + result[1] + "]");
 	}
 
@@ -46,4 +46,16 @@ public class App {
 		return result;
 	}
 
+	// Third Solution (One-pass Hash Table) -> O(n)
+	public static int[] twoSum3(int[] nums, int target) {
+		Map<Integer, Integer> complements = new HashMap<>();
+		for (int i = 0; i < nums.length; i++) {
+			Integer complementIndex = complements.get(nums[i]);
+			if (complementIndex != null) {
+				return new int[] {i, complementIndex};
+			}
+			complements.put(target - nums[i], i);
+		}
+		return nums;
+	}
 }
